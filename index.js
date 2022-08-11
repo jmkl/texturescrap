@@ -2,7 +2,9 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const pretty = require("pretty");
 const fs = require("fs");
-
+const express = require('express')
+const app = express()
+const port = 3000
 const url = "https://texturelabs.org/";
 const cat = ["?ct=19", "?ct=20", "?ct=21", "?ct=22", "?ct=23", "?ct=29", "?ct=24", "?ct=25", "?ct=26", "?ct=27", "?ct=28", "?ct=30", "?ct=31", "?ct=32", "?ct=33", "?ct=364", "?ct=34", "?ct=35", "?ct=167", "?ct=257", "?ct=260", "?ct=255", "?ct=258", "?ct=259", "?ct=405"];
 
@@ -26,9 +28,7 @@ async function getpageLinks(urls) {
     })
     return links;
 }
-
-
-(async()=>{
+async function createLinks(){
     let alllink = [];
     for (const c of cat) {
         let link = [url + c];
@@ -41,7 +41,15 @@ async function getpageLinks(urls) {
         })
         
     }
-    fs.writeFileSync("./public/result.json",JSON.stringify(alllink));
+    return JSON.stringify(alllink);
    
+}
 
-})();
+
+app.get('/', async (req, res) => {
+    res.send(await createLinks())
+  })
+  
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
