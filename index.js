@@ -32,14 +32,16 @@ async function getpageLinks(urls) {
     let alllink = [];
     for (const c of cat) {
         let link = [url + c];
+        alllink.push(link);
         await getpageLinks(link[0]).then((result) => {
             for (const l of result) {
-                link.push(l);
+                alllink.push(l);
             }
             
         })
-        alllink.push(link);
+        
     }
-    fs.writeFileSync("./public/result.json",JSON.stringify(alllink));
+    console.log(JSON.stringify(alllink))
+   
 
 })();
