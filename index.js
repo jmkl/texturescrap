@@ -40,6 +40,6 @@ async function getpageLinks(urls) {
         })
         alllink.push(link);
     }
-    fs.writeFileSync("public/result.json",JSON.stringify(alllink));
+    fs.writeFileSync("./public/result.json",JSON.stringify(alllink));
 
 })();
