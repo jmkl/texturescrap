@@ -28,7 +28,7 @@ async function getpageLinks(urls) {
     })
     return links;
 }
-async function createLinks(){
+async function createLinks() {
     let alllink = [];
     for (const c of cat) {
         let link = [url + c];
@@ -37,19 +37,19 @@ async function createLinks(){
             for (const l of result) {
                 alllink.push(l);
             }
-            
+
         })
-        
+
     }
     return JSON.stringify(alllink);
-   
+
 }
 
 
 app.get('/', async (req, res) => {
     res.send(await createLinks())
-  })
-  
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  })
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening on http://localhost:${port}`)
+})
