@@ -41,7 +41,7 @@ async function getpageLinks(urls) {
         })
         
     }
-    console.log(JSON.stringify(alllink))
+    fs.writeFileSync("./public/result.json",JSON.stringify(alllink));
    
 
 })();
